@@ -228,7 +228,7 @@ final class GoogleMapController
         }
       case "map#addGeoJsonData":
       {
-        Object geoJsonData = call.argument("geoJsonData");
+        final JSONObject geoJsonData = Convert.geoJsonDataToJsonObject(call.argument("geoJsonData"));
         addGeoJsonData(geoJsonData);
         result.success(null);
         break;

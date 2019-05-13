@@ -23,6 +23,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PatternItem;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.gms.maps.model.SquareCap;
+
+import org.json.JSONObject;
+
 import io.flutter.view.FlutterMain;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -238,6 +241,10 @@ class Convert {
 
   private static String toString(Object o) {
     return (String) o;
+  }
+
+  static JSONObject geoJsonDataToJsonObject(Object o) {
+    return new JSONObject(toString(o));
   }
 
   static void interpretGoogleMapOptions(Object o, GoogleMapOptionsSink sink) {

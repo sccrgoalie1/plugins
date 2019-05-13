@@ -33,6 +33,7 @@ class GoogleMap extends StatefulWidget {
     this.markers,
     this.polylines,
     this.circles,
+    this.geoJsonData,
     this.onCameraMoveStarted,
     this.onCameraMove,
     this.onCameraIdle,
@@ -79,6 +80,10 @@ class GoogleMap extends StatefulWidget {
 
   /// Circles to be placed on the map.
   final Set<Circle> circles;
+
+  /// Geo JSON data
+  
+  final String geoJsonData;
 
   /// Called when the camera starts moving.
   ///
@@ -213,6 +218,7 @@ class _GoogleMapState extends State<GoogleMap> {
     _updateMarkers();
     _updatePolylines();
     _updateCircles();
+    _updateGeoJsonDataLayer();
   }
 
   void _updateOptions() async {
@@ -232,6 +238,12 @@ class _GoogleMapState extends State<GoogleMap> {
     controller._updateMarkers(
         _MarkerUpdates.from(_markers.values.toSet(), widget.markers));
     _markers = _keyByMarkerId(widget.markers);
+  }
+
+  void _updateGeoJsonDataLayer() async {
+    final GoogleMapController controller = await _controller.future;
+    controller._addGeoJsonDataLayer(widget.geoJsonData);
+        
   }
 
   void _updatePolylines() async {

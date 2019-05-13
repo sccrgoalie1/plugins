@@ -113,6 +113,25 @@ class GoogleMapController {
     );
   }
 
+  /// Updates Geo Json Data Layer configuration.
+  ///
+  /// Change listeners are notified once the update has been made on the
+  /// platform side.
+  ///
+  /// The returned [Future] completes after listeners have been notified.
+  Future<void> _addGeoJsonDataLayer(String geoJsonData) async {
+    assert(geoJsonData != null);
+    // TODO(amirh): remove this on when the invokeMethod update makes it to stable Flutter.
+    // https://github.com/flutter/flutter/issues/26431
+    // ignore: strong_mode_implicit_dynamic_method
+    await channel.invokeMethod(
+      'map#addGeoJsonData',
+      <String, dynamic>{
+        'geoJsonData': geoJsonData,
+      },
+    );
+  }
+
   /// Updates polyline configuration.
   ///
   /// Change listeners are notified once the update has been made on the
