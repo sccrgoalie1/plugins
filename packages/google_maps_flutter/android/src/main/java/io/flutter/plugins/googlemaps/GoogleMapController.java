@@ -31,6 +31,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+
+import org.json.JSONObject;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
@@ -148,6 +152,11 @@ final class GoogleMapController
     googleMap.moveCamera(cameraUpdate);
   }
 
+  private void addGeoJsonData(JSONObject geoJsonData) {
+    GeoJsonLayer layer = new GeoJsonLayer(googleMap, geoJsonData);
+    layer.addLayerToMap();
+  }
+
   private void animateCamera(CameraUpdate cameraUpdate) {
     googleMap.animateCamera(cameraUpdate);
   }
@@ -217,6 +226,13 @@ final class GoogleMapController
           result.success(null);
           break;
         }
+      case "map#addGeoJsonData":
+      {
+        Object geoJsonData = call.argument("geoJsonData");
+        addGeoJsonData(geoJsonData);
+        result.success(null);
+        break;
+      }
       case "camera#animate":
         {
           final CameraUpdate cameraUpdate =
