@@ -244,7 +244,11 @@ class Convert {
   }
 
   static JSONObject geoJsonDataToJsonObject(Object o) {
-    return new JSONObject(toString(o));
+    try {
+      return new JSONObject(toString(o));
+    } catch (Throwable t) {
+      return null;
+    }
   }
 
   static void interpretGoogleMapOptions(Object o, GoogleMapOptionsSink sink) {
