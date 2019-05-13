@@ -4,6 +4,8 @@
 
 #import <Flutter/Flutter.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "<Google-Maps-iOS-Utils/GMUGeoJSONParser.h>"
+#import "<Google-Maps-iOS-Utils/GMUGeometryRenderer.h>"
 #import "GoogleMapCircleController.h"
 #import "GoogleMapMarkerController.h"
 #import "GoogleMapPolylineController.h"

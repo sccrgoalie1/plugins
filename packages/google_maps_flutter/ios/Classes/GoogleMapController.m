@@ -125,6 +125,9 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
   } else if ([call.method isEqualToString:@"camera#move"]) {
     [self moveWithCameraUpdate:ToCameraUpdate(call.arguments[@"cameraUpdate"])];
     result(nil);
+  } else if ([call.method isEqualToString:@"map#addGeoJsonData"]) {
+    [self addGeoJsonData:call.arguments[@"geoJsonData"]];
+    result(nil);
   } else if ([call.method isEqualToString:@"map#update"]) {
     InterpretMapOptions(call.arguments[@"options"], self);
     result(PositionToJson([self cameraPosition]));
@@ -225,6 +228,14 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
 
 - (void)moveWithCameraUpdate:(GMSCameraUpdate*)cameraUpdate {
   [_mapView moveCamera:cameraUpdate];
+}
+
+- (void)addGeoJsonData:(NSData*)geoJsonData {
+  GMUGeoJSONParser *parser = [[GMUGeoJSONParser alloc] initWithData:geoJsonData];
+  [parser parse];
+  GMUGeometryRenderer *renderer = [[GMUGeometryRenderer alloc] initWithMap:_mapView
+                                                                geometries:parser.features];
+  [renderer render];
 }
 
 - (GMSCameraPosition*)cameraPosition {
