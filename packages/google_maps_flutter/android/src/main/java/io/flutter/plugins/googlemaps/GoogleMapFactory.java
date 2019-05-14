@@ -41,6 +41,9 @@ public class GoogleMapFactory extends PlatformViewFactory {
     if (params.containsKey("circlesToAdd")) {
       builder.setInitialCircles(params.get("circlesToAdd"));
     }
+    if (params.containsKey("geoJsonToAdd")) {
+      builder.setInitialGeoJsonData(params.get("geoJsonToAdd"));
+    }
     return builder.build(id, context, mActivityState, mPluginRegistrar);
   }
 }

@@ -179,6 +179,7 @@ class _GoogleMapState extends State<GoogleMap> {
       'markersToAdd': _serializeMarkerSet(widget.markers),
       'polylinesToAdd': _serializePolylineSet(widget.polylines),
       'circlesToAdd': _serializeCircleSet(widget.circles),
+      'geoJsonToAdd': widget.geoJsonData
     };
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(

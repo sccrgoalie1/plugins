@@ -83,6 +83,7 @@ final class GoogleMapController
   private List<Object> initialMarkers;
   private List<Object> initialPolylines;
   private List<Object> initialCircles;
+  private JSONObject initialGeoJsonData;
 
   GoogleMapController(
       int id,
@@ -519,6 +520,18 @@ final class GoogleMapController
 
   private void updateInitialMarkers() {
     markersController.addMarkers(initialMarkers);
+  }
+
+  @Override
+  public void setInitialGeoJsonData(Object initialGeoJsonData) {
+    this.initialGeoJsonData = Convert.geoJsonDataToJsonObject(initialGeoJsonData);
+    if (googleMap != null) {
+      updateInitialGeoJsonData();
+    }
+  }
+
+  private void updateInitialGeoJsonData() {
+    addGeoJsonData(initialGeoJsonData);
   }
 
   @Override
