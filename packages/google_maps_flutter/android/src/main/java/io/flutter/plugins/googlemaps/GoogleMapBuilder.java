@@ -8,6 +8,9 @@ import android.content.Context;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import org.json.JSONObject;
+
 import io.flutter.plugin.common.PluginRegistry;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,6 +22,7 @@ class GoogleMapBuilder implements GoogleMapOptionsSink {
   private Object initialMarkers;
   private Object initialPolylines;
   private Object initialCircles;
+  private Object initialGeoJsonData;
 
   GoogleMapController build(
       int id, Context context, AtomicInteger state, PluginRegistry.Registrar registrar) {
@@ -31,6 +35,7 @@ class GoogleMapBuilder implements GoogleMapOptionsSink {
     controller.setInitialMarkers(initialMarkers);
     controller.setInitialPolylines(initialPolylines);
     controller.setInitialCircles(initialCircles);
+    controller.setInitialGeoJsonData(initialGeoJsonData);
     return controller;
   }
 
@@ -111,5 +116,10 @@ class GoogleMapBuilder implements GoogleMapOptionsSink {
   @Override
   public void setInitialCircles(Object initialCircles) {
     this.initialCircles = initialCircles;
+  }
+
+  @Override
+  public void setInitialGeoJsonData(Object initialGeoJsonData) {
+    this.initialGeoJsonData = initialGeoJsonData;
   }
 }
