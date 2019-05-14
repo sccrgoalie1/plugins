@@ -188,6 +188,7 @@ final class GoogleMapController
     updateInitialMarkers();
     updateInitialPolylines();
     updateInitialCircles();
+    updateInitialGeoJsonData();
   }
 
   @Override
