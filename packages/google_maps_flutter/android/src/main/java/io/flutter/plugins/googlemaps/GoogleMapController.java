@@ -84,6 +84,7 @@ final class GoogleMapController
   private List<Object> initialPolylines;
   private List<Object> initialCircles;
   private JSONObject initialGeoJsonData;
+  private GeoJsonLayer layer;
 
   GoogleMapController(
       int id,
@@ -154,7 +155,10 @@ final class GoogleMapController
   }
 
   private void addGeoJsonData(JSONObject geoJsonData) {
-    GeoJsonLayer layer = new GeoJsonLayer(googleMap, geoJsonData);
+    if (layer != null) {
+      layer.removeLayerFromMap();
+    }
+    layer = new GeoJsonLayer(googleMap, geoJsonData);
     layer.addLayerToMap();
   }
 

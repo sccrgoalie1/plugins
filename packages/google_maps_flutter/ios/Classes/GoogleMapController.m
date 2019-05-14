@@ -241,6 +241,7 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
   [parser parse];
   GMUGeometryRenderer *renderer = [[GMUGeometryRenderer alloc] initWithMap:_mapView
                                                                 geometries:parser.features];
+  [renderer clear];
   [renderer render];
 }
 
