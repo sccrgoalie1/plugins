@@ -46,6 +46,7 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
   GMSMapView* _mapView;
   int64_t _viewId;
   FlutterMethodChannel* _channel;
+  GMUGeometryRenderer *_renderer;
   BOOL _trackCameraPosition;
   NSObject<FlutterPluginRegistrar>* _registrar;
   // Used for the temporary workaround for a bug that the camera is not properly positioned at
@@ -239,10 +240,12 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
 - (void)addGeoJsonData:(NSData*)geoJsonData {
   GMUGeoJSONParser *parser = [[GMUGeoJSONParser alloc] initWithData:geoJsonData];
   [parser parse];
-  GMUGeometryRenderer *renderer = [[GMUGeometryRenderer alloc] initWithMap:_mapView
-                                                                geometries:parser.features];
-  [renderer clear];
-  [renderer render];
+  if (_renderer) {
+    [_renderer clear];
+  }
+  _renderer = [[GMUGeometryRenderer alloc] initWithMap:_mapView
+                                                                geometries:parser.features];  
+  [_renderer render];
 }
 
 - (GMSCameraPosition*)cameraPosition {
