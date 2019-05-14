@@ -105,7 +105,7 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
       [_circlesController addCircles:circlesToAdd];
     }
     id geoJsonToAdd = args[@"geoJsonToAdd"];
-    if ([geoJsonToAdd isKindOfClass:[NSData class]]) {
+    if ([geoJsonToAdd isKindOfClass:[NSString class]]) {
       [self addGeoJsonData:geoJsonToAdd];
     }
   }
