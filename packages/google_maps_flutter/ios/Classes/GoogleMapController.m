@@ -106,7 +106,8 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
     }
     id geoJsonToAdd = args[@"geoJsonToAdd"];
     if ([geoJsonToAdd isKindOfClass:[NSString class]]) {
-      [self addGeoJsonData:geoJsonToAdd];
+      NSData *data = [geoJsonToAdd dataUsingEncoding:NSUTF8StringEncoding];
+      [self addGeoJsonData:data];
     }
   }
   return self;
@@ -130,7 +131,8 @@ static double ToDouble(NSNumber* data) { return [FLTGoogleMapJsonConversions toD
     [self moveWithCameraUpdate:ToCameraUpdate(call.arguments[@"cameraUpdate"])];
     result(nil);
   } else if ([call.method isEqualToString:@"map#addGeoJsonData"]) {
-    [self addGeoJsonData:call.arguments[@"geoJsonData"]];
+     NSData *data = [call.arguments[@"geoJsonData"] dataUsingEncoding:NSUTF8StringEncoding];
+    [self addGeoJsonData:data];
     result(nil);
   } else if ([call.method isEqualToString:@"map#update"]) {
     InterpretMapOptions(call.arguments[@"options"], self);
